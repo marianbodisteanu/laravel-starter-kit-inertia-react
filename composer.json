@@ -1,13 +1,17 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "nunomaduro/laravel-starter-kit-inertia-react",
+    "name": "marianbodisteanu/laravel-starter-kit-inertia-react",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "An ultra-strict, type-safe Laravel + Inertia + React starter kit.",
     "keywords": [
         "laravel",
-        "framework"
+        "framework",
+        "inertia",
+        "react",
+        "starter-kit"
     ],
     "license": "MIT",
+    "homepage": "https://github.com/marianbodisteanu/laravel-starter-kit-inertia-react",
     "require": {
         "php": "^8.5.0",
         "inertiajs/inertia-laravel": "^v3.1.0",
