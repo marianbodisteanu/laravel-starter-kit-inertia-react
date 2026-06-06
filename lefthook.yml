@@ -1,0 +1,4 @@
+pre-push:
+  jobs:
+    - name: composer test
+      run: composer test
