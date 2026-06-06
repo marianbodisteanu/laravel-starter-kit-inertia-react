@@ -1,3 +1,5 @@
 # General Guidelines
 
-- Don't include any superfluous PHP Annotations, except ones that start with `@` for typing variables.
+- No superfluous PHP annotations. Exception: `@`-prefixed for var typing.
+- Commit msg → use `caveman-commit` skill.
+- Create/edit under `.ai/guidelines` → use `caveman` skill at `ultra`.
