@@ -100,11 +100,13 @@
             "phpstan --memory-limit=2G",
             "bun run test:types"
         ],
+        "test:audit": "composer audit --abandoned=ignore",
         "test": [
             "@test:type-coverage",
             "@test:unit",
             "@test:lint",
-            "@test:types"
+            "@test:types",
+            "@test:audit"
         ]
     },
     "extra": {
