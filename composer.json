@@ -94,7 +94,7 @@
             "rector --dry-run",
             "bun run test:lint"
         ],
-        "test:unit": "XDEBUG_MODE=\"coverage\" pest --parallel --coverage --exactly=100.0",
+        "test:unit": "if command -v herd >/dev/null 2>&1; then herd coverage -d memory_limit=2G vendor/bin/pest --parallel --coverage --exactly=100.0; else XDEBUG_MODE=\"coverage\" pest --parallel --coverage --exactly=100.0; fi",
         "test:types": [
             "phpstan --memory-limit=2G",
             "bun run test:types"
