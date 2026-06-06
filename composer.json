@@ -17,7 +17,7 @@
         "inertiajs/inertia-laravel": "^v3.1.0",
         "laravel/fortify": "^1.37.2",
         "laravel/framework": "^13.14.0",
-        "laravel/wayfinder": "^0.1.20",
+        "laravel/wayfinder": "dev-next",
         "nunomaduro/essentials": "^1.2.0"
     },
     "require-dev": {
@@ -78,6 +78,9 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "wayfinder:generate": [
+            "@php -d memory_limit=2G artisan wayfinder:generate @additional_args"
         ],
         "update:requirements": [
             "composer bump",

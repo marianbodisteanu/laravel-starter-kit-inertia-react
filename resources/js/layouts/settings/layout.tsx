@@ -5,11 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { cn, toUrl } from '@/lib/utils';
-import { edit as editAppearance } from '@/routes/appearance';
-import { edit as editPassword } from '@/routes/password';
-import { show as showTwoFactor } from '@/routes/two-factor';
-import { edit } from '@/routes/user-profile';
 import type { NavItem } from '@/types';
+import { edit as editAppearance } from '@/wayfinder/routes/appearance';
+import { edit as editPassword } from '@/wayfinder/routes/password';
+import { show as showTwoFactor } from '@/wayfinder/routes/two-factor';
+import { edit } from '@/wayfinder/routes/user-profile';
 
 const sidebarNavItems: NavItem[] = [
     {

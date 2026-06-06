@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/input-otp';
 import { OTP_MAX_LENGTH } from '@/hooks/use-two-factor-auth';
 import AuthLayout from '@/layouts/auth-layout';
-import { store } from '@/routes/two-factor/login';
+import { store } from '@/wayfinder/routes/two-factor/login';
 
 export default function Show() {
     const [showRecoveryInput, setShowRecoveryInput] = useState<boolean>(false);

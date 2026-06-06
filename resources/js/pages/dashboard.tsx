@@ -1,8 +1,8 @@
 import { Head } from '@inertiajs/react';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
-import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
+import { dashboard } from '@/wayfinder/routes';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

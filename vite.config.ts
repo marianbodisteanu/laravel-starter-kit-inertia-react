@@ -59,7 +59,7 @@ export default defineConfig({
         react(),
         tailwindcss(),
         wayfinder({
-            formVariants: true,
+            command: 'composer wayfinder:generate',
         }),
     ],
 });
