@@ -52,6 +52,24 @@ composer setup
 composer dev
 ```
 
+### Database Seeding
+
+The `DatabaseSeeder` creates a single test user for local development:
+
+| Field    | Value             |
+| -------- | ----------------- |
+| Email    | `test@test.test`  |
+| Password | `password`        |
+
+Seed it with:
+
+```bash
+php artisan db:seed
+
+# Or rebuild the database from scratch and seed:
+php artisan migrate:fresh --seed
+```
+
 ### Optional: Browser Testing Setup
 
 If you plan to use Pest's browser testing capabilities:
