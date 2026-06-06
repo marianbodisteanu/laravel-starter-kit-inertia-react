@@ -12,5 +12,3 @@ arch()->preset()->security()->ignoring([
 arch('controllers')
     ->expect('App\Http\Controllers')
     ->not->toBeUsed();
-
-//

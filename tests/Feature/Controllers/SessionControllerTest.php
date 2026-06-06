@@ -139,7 +139,6 @@ it('throttles login attempts after too many failures', function (): void {
         'password' => Hash::make('password'),
     ]);
 
-    // Make 5 failed login attempts to trigger rate limiting
     for ($i = 0; $i < 5; $i++) {
         $this->fromRoute('login')
             ->post(route('login.store'), [
@@ -148,7 +147,6 @@ it('throttles login attempts after too many failures', function (): void {
             ]);
     }
 
-    // The 6th attempt should be throttled
     $response = $this->fromRoute('login')
         ->post(route('login.store'), [
             'email' => 'test@example.com',
@@ -168,7 +166,6 @@ it('clears rate limit after successful login', function (): void {
         'password' => Hash::make('password'),
     ]);
 
-    // Make a few failed attempts
     for ($i = 0; $i < 3; $i++) {
         $this->fromRoute('login')
             ->post(route('login.store'), [
@@ -177,7 +174,6 @@ it('clears rate limit after successful login', function (): void {
             ]);
     }
 
-    // Successful login should clear the rate limit
     $response = $this->fromRoute('login')
         ->post(route('login.store'), [
             'email' => 'test@example.com',
@@ -196,8 +192,6 @@ it('dispatches lockout event when rate limit is reached', function (): void {
         'password' => Hash::make('password'),
     ]);
 
-    // Make 6 failed login attempts to trigger rate limiting and Lockout event
-    // The Lockout event fires on the 6th attempt when tooManyAttempts returns true
     for ($i = 0; $i < 6; $i++) {
         $this->fromRoute('login')
             ->post(route('login.store'), [
