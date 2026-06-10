@@ -36,9 +36,6 @@ const sidebarNavItems: NavItem[] = [
 
 export function SettingsLayout({ children }: PropsWithChildren) {
     const { isCurrentOrParentUrl } = useCurrentUrl();
-    if (typeof window === 'undefined') {
-        return null;
-    }
 
     return (
         <div className="px-4 py-6">
