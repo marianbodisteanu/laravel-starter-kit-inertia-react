@@ -29,14 +29,6 @@ const setCookie = (name: string, value: string, days = 365): void => {
     document.cookie = `${name}=${value};path=/;max-age=${maxAge};SameSite=Lax`;
 };
 
-const getStoredAppearance = (): Appearance => {
-    if (typeof window === 'undefined') {
-        return 'system';
-    }
-
-    return (localStorage.getItem('appearance') as Appearance) || 'system';
-};
-
 const isDarkMode = (appearance: Appearance): boolean => {
     return appearance === 'dark' || (appearance === 'system' && prefersDark());
 };
@@ -85,15 +77,18 @@ export function initializeTheme(): void {
         return;
     }
 
-    if (!localStorage.getItem('appearance')) {
+    const storedAppearance = localStorage.getItem(
+        'appearance',
+    ) as Appearance | null;
+
+    if (!storedAppearance) {
         localStorage.setItem('appearance', 'system');
         setCookie('appearance', 'system');
     }
 
-    currentAppearance = getStoredAppearance();
+    currentAppearance = storedAppearance ?? 'system';
     applyTheme(currentAppearance);
 
-    // Set up system theme change listener
     mediaQuery()?.addEventListener('change', handleSystemThemeChange);
 }
 
