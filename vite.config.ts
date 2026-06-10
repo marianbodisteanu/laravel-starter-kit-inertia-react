@@ -15,15 +15,17 @@ export default defineConfig({
         plugins: ['eslint', 'typescript', 'unicorn', 'oxc', 'import'],
         jsPlugins: [
             {name: 'react-doctor', specifier: 'oxlint-plugin-react-doctor'},
+            {name: 'local', specifier: './.oxlint/no-comments.mjs'},
         ],
         rules: {
             ...RECOMMENDED_RULES,
             'import/no-cycle': 'error',
             'import/no-default-export': 'error',
+            'local/no-comments': 'error',
         },
         overrides: [
             {
-                files: ['resources/js/pages/**', '.ncurc.mjs'],
+                files: ['resources/js/pages/**', '.ncurc.mjs', '.oxlint/**'],
                 rules: {
                     'import/no-default-export': 'off',
                 },
