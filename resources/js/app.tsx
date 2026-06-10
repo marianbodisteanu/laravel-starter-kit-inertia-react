@@ -1,4 +1,4 @@
-import { createInertiaApp, http, router } from '@inertiajs/react';
+import { createInertiaApp, http } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { ComponentType } from 'react';
 import { StrictMode } from 'react';
@@ -6,7 +6,6 @@ import { createRoot } from 'react-dom/client';
 import { Toaster } from '@/components/ui/toast';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { initializeTheme } from '@/hooks/use-appearance';
-import { toastManager } from '@/lib/toast';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -17,17 +16,6 @@ http.onRequest((config) => {
     };
 
     return config;
-});
-
-router.on('flash', (event) => {
-    const flashToast = event.detail.flash.toast;
-
-    if (flashToast) {
-        toastManager.add({
-            type: flashToast.type,
-            title: flashToast.message,
-        });
-    }
 });
 
 void createInertiaApp({

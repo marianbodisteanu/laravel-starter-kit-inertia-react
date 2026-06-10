@@ -1,3 +1,4 @@
+import { router } from "@inertiajs/react"
 import { Toast } from "@base-ui/react/toast"
 import type { LucideIcon } from "lucide-react"
 import {
@@ -8,8 +9,20 @@ import {
   XIcon,
 } from "lucide-react"
 
-import { toastManager } from "@/lib/toast"
 import { cn } from "@/lib/utils"
+
+export const toastManager = Toast.createToastManager()
+
+router.on("flash", (event) => {
+  const flashToast = event.detail.flash.toast
+
+  if (flashToast) {
+    toastManager.add({
+      type: flashToast.type,
+      title: flashToast.message,
+    })
+  }
+})
 
 const toastIcons: Record<string, LucideIcon> = {
   success: CircleCheckIcon,
