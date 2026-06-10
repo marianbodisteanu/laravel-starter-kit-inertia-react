@@ -70,6 +70,16 @@ const mediaQuery = (): MediaQueryList | null => {
 
 const handleSystemThemeChange = (): void => applyTheme(currentAppearance);
 
+const updateAppearance = (mode: Appearance): void => {
+    currentAppearance = mode;
+
+    localStorage.setItem('appearance', mode);
+    setCookie('appearance', mode);
+
+    applyTheme(mode);
+    notify();
+};
+
 export function initializeTheme(): void {
     if (typeof window === 'undefined') {
         return;
@@ -97,19 +107,6 @@ export function useAppearance(): UseAppearanceReturn {
     const resolvedAppearance: ResolvedAppearance = isDarkMode(appearance)
         ? 'dark'
         : 'light';
-
-    const updateAppearance = (mode: Appearance): void => {
-        currentAppearance = mode;
-
-        // Store in localStorage for client-side persistence...
-        localStorage.setItem('appearance', mode);
-
-        // Store in cookie for SSR...
-        setCookie('appearance', mode);
-
-        applyTheme(mode);
-        notify();
-    };
 
     return { appearance, resolvedAppearance, updateAppearance } as const;
 }
