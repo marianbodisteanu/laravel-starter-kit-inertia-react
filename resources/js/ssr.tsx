@@ -19,7 +19,7 @@ createServer((page) =>
             ),
         setup: ({ App, props }) => {
             return (
-                <TooltipProvider delayDuration={0}>
+                <TooltipProvider>
                     <App {...props} />
                 </TooltipProvider>
             );

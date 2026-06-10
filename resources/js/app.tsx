@@ -30,7 +30,7 @@ void createInertiaApp({
 
         root.render(
             <StrictMode>
-                <TooltipProvider delayDuration={0}>
+                <TooltipProvider>
                     <App {...props} />
                 </TooltipProvider>
             </StrictMode>,
