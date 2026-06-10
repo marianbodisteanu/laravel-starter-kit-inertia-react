@@ -11,7 +11,7 @@ const tabs: { value: Appearance; icon: LucideIcon; label: string }[] = [
     { value: 'system', icon: Monitor, label: 'System' },
 ];
 
-export default function AppearanceToggleTab({
+export function AppearanceToggleTab({
     className = '',
     ...props
 }: HTMLAttributes<HTMLDivElement>) {

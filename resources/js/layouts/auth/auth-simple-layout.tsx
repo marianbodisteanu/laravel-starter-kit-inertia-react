@@ -1,9 +1,9 @@
 import { Link } from '@inertiajs/react';
-import AppLogoIcon from '@/components/app-logo-icon';
+import { AppLogoIcon } from '@/components/app-logo-icon';
 import type { AuthLayoutProps } from '@/types';
 import { home } from '@/wayfinder/routes';
 
-export default function AuthSimpleLayout({
+export function AuthSimpleLayout({
     children,
     title,
     description,

@@ -1,7 +1,7 @@
 import { Form, Head } from '@inertiajs/react';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 import { useState } from 'react';
-import InputError from '@/components/input-error';
+import { InputError } from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -10,7 +10,7 @@ import {
     InputOTPSlot,
 } from '@/components/ui/input-otp';
 import { OTP_MAX_LENGTH } from '@/hooks/use-two-factor-auth';
-import AuthLayout from '@/layouts/auth-layout';
+import { AuthLayout } from '@/layouts/auth-layout';
 import { store } from '@/wayfinder/routes/two-factor/login';
 
 export default function Show() {

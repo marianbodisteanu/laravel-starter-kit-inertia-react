@@ -1,13 +1,13 @@
 import { Transition } from '@headlessui/react';
 import { Form, Head } from '@inertiajs/react';
 import { useRef } from 'react';
-import Heading from '@/components/heading';
-import InputError from '@/components/input-error';
-import PasswordInput from '@/components/password-input';
+import { Heading } from '@/components/heading';
+import { InputError } from '@/components/input-error';
+import { PasswordInput } from '@/components/password-input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import AppLayout from '@/layouts/app-layout';
-import SettingsLayout from '@/layouts/settings/layout';
+import { AppLayout } from '@/layouts/app-layout';
+import { SettingsLayout } from '@/layouts/settings/layout';
 import type { BreadcrumbItem } from '@/types';
 import UserPasswordController from '@/wayfinder/App/Http/Controllers/UserPasswordController';
 import { edit } from '@/wayfinder/routes/password';

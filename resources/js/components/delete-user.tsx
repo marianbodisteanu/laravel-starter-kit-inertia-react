@@ -1,8 +1,8 @@
 import { Form } from '@inertiajs/react';
 import { useRef } from 'react';
-import Heading from '@/components/heading';
-import InputError from '@/components/input-error';
-import PasswordInput from '@/components/password-input';
+import { Heading } from '@/components/heading';
+import { InputError } from '@/components/input-error';
+import { PasswordInput } from '@/components/password-input';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -16,7 +16,7 @@ import {
 import { Label } from '@/components/ui/label';
 import UserController from '@/wayfinder/App/Http/Controllers/UserController';
 
-export default function DeleteUser() {
+export function DeleteUser() {
     const passwordInput = useRef<HTMLInputElement>(null);
 
     return (

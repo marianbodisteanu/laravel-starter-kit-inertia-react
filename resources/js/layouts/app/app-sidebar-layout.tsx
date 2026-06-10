@@ -6,7 +6,7 @@ import type { AppLayoutProps, BreadcrumbItem } from '@/types';
 
 const defaultBreadcrumbs: BreadcrumbItem[] = [];
 
-export default function AppSidebarLayout({
+export function AppSidebarLayout({
     children,
     breadcrumbs = defaultBreadcrumbs,
 }: AppLayoutProps) {
