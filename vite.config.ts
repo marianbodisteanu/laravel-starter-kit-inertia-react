@@ -3,6 +3,7 @@ import {wayfinder} from '@laravel/vite-plugin-wayfinder';
 import tailwindcss from '@tailwindcss/vite';
 import react, {reactCompilerPreset} from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
+import {RECOMMENDED_RULES} from 'oxlint-plugin-react-doctor';
 import {defineConfig} from 'vite-plus';
 
 export default defineConfig({
@@ -11,8 +12,18 @@ export default defineConfig({
             typeAware: true,
             typeCheck: true,
         },
-        plugins: ['eslint', 'typescript', 'unicorn', 'oxc', 'react'],
-        ignorePatterns: ['vite.config.ts'],
+        plugins: ['eslint', 'typescript', 'unicorn', 'oxc'],
+        jsPlugins: [
+            {name: 'react-doctor', specifier: 'oxlint-plugin-react-doctor'},
+        ],
+        rules: {
+            ...RECOMMENDED_RULES,
+        },
+        ignorePatterns: [
+            'vite.config.ts',
+            'resources/js/components/ui/*',
+            'resources/js/wayfinder/*',
+        ],
     },
     fmt: {
         printWidth: 80,
@@ -46,8 +57,6 @@ export default defineConfig({
         ignorePatterns: [
             'resources/js/components/ui/*',
             'resources/views/mail/*',
-            'resources/js/actions/*',
-            'resources/js/routes/*',
             'resources/js/wayfinder/*',
         ],
     },
