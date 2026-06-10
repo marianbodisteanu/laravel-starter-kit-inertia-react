@@ -115,9 +115,9 @@ export default function TwoFactorRecoveryCodes({
                                     aria-label="Recovery codes"
                                 >
                                     {recoveryCodesList.length ? (
-                                        recoveryCodesList.map((code, index) => (
+                                        recoveryCodesList.map((code) => (
                                             <div
-                                                key={index}
+                                                key={code}
                                                 role="listitem"
                                                 className="select-text"
                                             >
@@ -133,7 +133,7 @@ export default function TwoFactorRecoveryCodes({
                                                 { length: 8 },
                                                 (_, index) => (
                                                     <div
-                                                        key={index}
+                                                        key={`skeleton-${index + 1}`}
                                                         className="h-4 animate-pulse rounded bg-muted-foreground/20"
                                                         aria-hidden="true"
                                                     />
