@@ -12,13 +12,23 @@ export default defineConfig({
             typeAware: true,
             typeCheck: true,
         },
-        plugins: ['eslint', 'typescript', 'unicorn', 'oxc'],
+        plugins: ['eslint', 'typescript', 'unicorn', 'oxc', 'import'],
         jsPlugins: [
             {name: 'react-doctor', specifier: 'oxlint-plugin-react-doctor'},
         ],
         rules: {
             ...RECOMMENDED_RULES,
+            'import/no-cycle': 'error',
+            'import/no-default-export': 'error',
         },
+        overrides: [
+            {
+                files: ['resources/js/pages/**', '.ncurc.mjs'],
+                rules: {
+                    'import/no-default-export': 'off',
+                },
+            },
+        ],
         ignorePatterns: [
             'vite.config.ts',
             'resources/js/components/ui/*',
