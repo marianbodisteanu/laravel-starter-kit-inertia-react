@@ -56,8 +56,8 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - rector/rector (RECTOR) - v2
 - @inertiajs/react (INERTIA_REACT) - v3
 - react (REACT) - v19
-- tailwindcss (TAILWINDCSS) - v4
 - @laravel/vite-plugin-wayfinder (WAYFINDER_VITE) - v0
+- tailwindcss (TAILWINDCSS) - v4
 
 ## Skills Activation
 
