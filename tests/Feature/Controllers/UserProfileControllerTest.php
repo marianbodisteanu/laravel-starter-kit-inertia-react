@@ -30,7 +30,9 @@ it('may update profile information', function (): void {
             'email' => 'new@example.com',
         ]);
 
-    $response->assertRedirectToRoute('user-profile.edit');
+    $response->assertRedirectToRoute('user-profile.edit')
+        ->assertInertiaFlash('toast.type', 'success')
+        ->assertInertiaFlash('toast.message', 'Profile updated.');
 
     expect($user->refresh()->name)->toBe('New Name')
         ->and($user->email)->toBe('new@example.com');
