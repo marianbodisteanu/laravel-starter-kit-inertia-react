@@ -1,7 +1,7 @@
 import { Form } from '@inertiajs/react';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 import { Check, Copy, ScanLine } from 'lucide-react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AlertError from '@/components/alert-error';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
@@ -245,6 +245,41 @@ type Props = {
     errors: string[];
 };
 
+type ModalConfig = {
+    title: string;
+    description: string;
+    buttonText: string;
+};
+
+function getModalConfig(
+    twoFactorEnabled: boolean,
+    showVerificationStep: boolean,
+): ModalConfig {
+    if (twoFactorEnabled) {
+        return {
+            title: 'Two-factor authentication enabled',
+            description:
+                'Two-factor authentication is now enabled. Scan the QR code or enter the setup key in your authenticator app.',
+            buttonText: 'Close',
+        };
+    }
+
+    if (showVerificationStep) {
+        return {
+            title: 'Verify authentication code',
+            description: 'Enter the 6-digit code from your authenticator app',
+            buttonText: 'Continue',
+        };
+    }
+
+    return {
+        title: 'Enable two-factor authentication',
+        description:
+            'To finish enabling two-factor authentication, scan the QR code or enter the setup key in your authenticator app',
+        buttonText: 'Continue',
+    };
+}
+
 export default function TwoFactorSetupModal({
     isOpen,
     onClose,
@@ -259,38 +294,9 @@ export default function TwoFactorSetupModal({
     const [showVerificationStep, setShowVerificationStep] =
         useState<boolean>(false);
 
-    const modalConfig = useMemo<{
-        title: string;
-        description: string;
-        buttonText: string;
-    }>(() => {
-        if (twoFactorEnabled) {
-            return {
-                title: 'Two-factor authentication enabled',
-                description:
-                    'Two-factor authentication is now enabled. Scan the QR code or enter the setup key in your authenticator app.',
-                buttonText: 'Close',
-            };
-        }
+    const modalConfig = getModalConfig(twoFactorEnabled, showVerificationStep);
 
-        if (showVerificationStep) {
-            return {
-                title: 'Verify authentication code',
-                description:
-                    'Enter the 6-digit code from your authenticator app',
-                buttonText: 'Continue',
-            };
-        }
-
-        return {
-            title: 'Enable two-factor authentication',
-            description:
-                'To finish enabling two-factor authentication, scan the QR code or enter the setup key in your authenticator app',
-            buttonText: 'Continue',
-        };
-    }, [twoFactorEnabled, showVerificationStep]);
-
-    const handleModalNextStep = useCallback(() => {
+    const handleModalNextStep = (): void => {
         if (requiresConfirmation) {
             setShowVerificationStep(true);
             return;
@@ -298,15 +304,15 @@ export default function TwoFactorSetupModal({
 
         clearSetupData();
         onClose();
-    }, [requiresConfirmation, clearSetupData, onClose]);
+    };
 
-    const resetModalState = useCallback(() => {
+    const resetModalState = (): void => {
         setShowVerificationStep(false);
 
         if (twoFactorEnabled) {
             clearSetupData();
         }
-    }, [twoFactorEnabled, clearSetupData]);
+    };
 
     useEffect(() => {
         if (isOpen && !qrCodeSvg) {
@@ -314,10 +320,10 @@ export default function TwoFactorSetupModal({
         }
     }, [isOpen, qrCodeSvg, fetchSetupData]);
 
-    const handleClose = useCallback(() => {
+    const handleClose = (): void => {
         resetModalState();
         onClose();
-    }, [onClose, resetModalState]);
+    };
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
