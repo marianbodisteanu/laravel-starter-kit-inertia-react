@@ -17,14 +17,15 @@ Modern PHP has evolved into a mature, type-safe language, yet many Laravel proje
 
 - **Fully Actions-Oriented Architecture**: Every operation is encapsulated in a single-action class
 - **Cruddy by Design**: Standardized CRUD operations for all controllers, actions, and Inertia & React pages
+- **Modern React Frontend**: Inertia v3, React 19 compiled with the React Compiler, and shadcn/ui components on Base UI
 - **100% Type Coverage**: Every method, property, and parameter is explicitly typed
-- **Zero Tolerance for Code Smells**: Rector, PHPStan, and Vite Plus (lint & format) at maximum strictness catch issues before they become bugs
+- **Zero Tolerance for Code Smells**: Rector, PHPStan, and Vite Plus (lint & format) with React Doctor rules at maximum strictness catch issues before they become bugs
 - **Immutable-First Architecture**: Data structures favor immutability to prevent unexpected mutations
 - **Fail-Fast Philosophy**: Errors are caught at compile-time, not runtime
 - **Automated Code Quality**: Pre-configured tools ensure consistent, pristine code across your entire team
 - **Just Better Laravel Defaults**: Thanks to **[Essentials](https://github.com/nunomaduro/essentials)** / strict models, auto eager loading, immutable dates, and more...
 - **AI Guidelines**: Integrated AI guidelines to assist in maintaining code quality and consistency
-- **Full Testing Suite**: More than 150 tests with 100% code coverage using Pest
+- **Full Testing Suite**: More than 160 tests with 100% code coverage using Pest
 
 This isn't just another Laravel boilerplate—it's a statement that PHP applications can and should be built with the same rigor as strongly-typed languages like Rust or TypeScript.
 
