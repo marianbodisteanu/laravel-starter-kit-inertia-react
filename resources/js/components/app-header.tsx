@@ -63,7 +63,9 @@ const rightNavItems: NavItem[] = [
 const activeItemStyles =
     'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100';
 
-export function AppHeader({ breadcrumbs = [] }: Props) {
+const defaultBreadcrumbs: BreadcrumbItem[] = [];
+
+export function AppHeader({ breadcrumbs = defaultBreadcrumbs }: Props) {
     const page = usePage();
     const { auth } = page.props;
     const getInitials = useInitials();

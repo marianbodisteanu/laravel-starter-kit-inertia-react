@@ -2,8 +2,10 @@ import { Breadcrumbs } from '@/components/breadcrumbs';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import type { BreadcrumbItem as BreadcrumbItemType } from '@/types';
 
+const defaultBreadcrumbs: BreadcrumbItemType[] = [];
+
 export function AppSidebarHeader({
-    breadcrumbs = [],
+    breadcrumbs = defaultBreadcrumbs,
 }: {
     breadcrumbs?: BreadcrumbItemType[];
 }) {
