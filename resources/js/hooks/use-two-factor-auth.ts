@@ -14,6 +14,7 @@ export type UseTwoFactorAuthReturn = {
     errors: string[];
     clearErrors: () => void;
     clearSetupData: () => void;
+    clearTwoFactorAuthData: () => void;
     fetchQrCode: () => Promise<void>;
     fetchSetupKey: () => Promise<void>;
     fetchSetupData: () => Promise<void>;
@@ -74,6 +75,11 @@ export const useTwoFactorAuth = (): UseTwoFactorAuthReturn => {
         clearErrors();
     };
 
+    const clearTwoFactorAuthData = (): void => {
+        clearSetupData();
+        setRecoveryCodesList([]);
+    };
+
     const fetchRecoveryCodes = async (): Promise<void> => {
         try {
             clearErrors();
@@ -103,6 +109,7 @@ export const useTwoFactorAuth = (): UseTwoFactorAuthReturn => {
         errors,
         clearErrors,
         clearSetupData,
+        clearTwoFactorAuthData,
         fetchQrCode,
         fetchSetupKey,
         fetchSetupData,

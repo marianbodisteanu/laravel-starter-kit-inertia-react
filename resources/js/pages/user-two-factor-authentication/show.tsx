@@ -34,6 +34,7 @@ export default function TwoFactor({
         hasSetupData,
         manualSetupKey,
         clearSetupData,
+        clearTwoFactorAuthData,
         fetchSetupData,
         recoveryCodesList,
         fetchRecoveryCodes,
@@ -70,7 +71,10 @@ export default function TwoFactor({
                                 </p>
 
                                 <div className="relative inline">
-                                    <Form {...disable.form()}>
+                                    <Form
+                                        {...disable.form()}
+                                        onSuccess={clearTwoFactorAuthData}
+                                    >
                                         {({ processing }) => (
                                             <Button
                                                 variant="destructive"
