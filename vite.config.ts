@@ -1,6 +1,7 @@
+import babel from '@rolldown/plugin-babel';
 import {wayfinder} from '@laravel/vite-plugin-wayfinder';
 import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
+import react, {reactCompilerPreset} from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
 import {defineConfig} from 'vite-plus';
 
@@ -57,6 +58,9 @@ export default defineConfig({
             refresh: true,
         }),
         react(),
+        babel({
+            presets: [reactCompilerPreset()],
+        }),
         tailwindcss(),
         wayfinder({
             command: 'composer wayfinder:generate',

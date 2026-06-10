@@ -13,6 +13,7 @@
     "devDependencies": {
         "@inertiajs/vite": "^3.3.1",
         "@laravel/vite-plugin-wayfinder": "^0.1.7",
+        "@rolldown/plugin-babel": "0.2.3",
         "@tailwindcss/vite": "^4.3.0",
         "@types/node": "^25.9.2",
         "@types/react": "^19.2.17",
