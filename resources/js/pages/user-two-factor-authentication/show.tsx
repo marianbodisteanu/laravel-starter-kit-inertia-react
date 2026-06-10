@@ -41,6 +41,14 @@ export default function TwoFactor({
     } = useTwoFactorAuth();
     const [showSetupModal, setShowSetupModal] = useState<boolean>(false);
 
+    const openSetupModal = (): void => {
+        if (!qrCodeSvg) {
+            void fetchSetupData();
+        }
+
+        setShowSetupModal(true);
+    };
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Two-Factor Authentication" />
@@ -92,20 +100,14 @@ export default function TwoFactor({
 
                                 <div>
                                     {hasSetupData ? (
-                                        <Button
-                                            onClick={() =>
-                                                setShowSetupModal(true)
-                                            }
-                                        >
+                                        <Button onClick={openSetupModal}>
                                             <ShieldCheck />
                                             Continue setup
                                         </Button>
                                     ) : (
                                         <Form
                                             {...enable.form()}
-                                            onSuccess={() =>
-                                                setShowSetupModal(true)
-                                            }
+                                            onSuccess={openSetupModal}
                                         >
                                             {({ processing }) => (
                                                 <Button
@@ -129,7 +131,6 @@ export default function TwoFactor({
                             qrCodeSvg={qrCodeSvg}
                             manualSetupKey={manualSetupKey}
                             clearSetupData={clearSetupData}
-                            fetchSetupData={fetchSetupData}
                             errors={errors}
                         />
                     </div>

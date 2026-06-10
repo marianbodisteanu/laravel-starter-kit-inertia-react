@@ -241,7 +241,6 @@ type Props = {
     qrCodeSvg: string | null;
     manualSetupKey: string | null;
     clearSetupData: () => void;
-    fetchSetupData: () => Promise<void>;
     errors: string[];
 };
 
@@ -288,7 +287,6 @@ export default function TwoFactorSetupModal({
     qrCodeSvg,
     manualSetupKey,
     clearSetupData,
-    fetchSetupData,
     errors,
 }: Props) {
     const [showVerificationStep, setShowVerificationStep] =
@@ -313,12 +311,6 @@ export default function TwoFactorSetupModal({
             clearSetupData();
         }
     };
-
-    useEffect(() => {
-        if (isOpen && !qrCodeSvg) {
-            void fetchSetupData();
-        }
-    }, [isOpen, qrCodeSvg, fetchSetupData]);
 
     const handleClose = (): void => {
         resetModalState();
