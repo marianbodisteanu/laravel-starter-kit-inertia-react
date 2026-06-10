@@ -1,3 +1,4 @@
+import { useHttp } from '@inertiajs/react';
 import { useState } from 'react';
 import type { TwoFactorSecretKey, TwoFactorSetupData } from '@/types';
 import {
@@ -23,19 +24,11 @@ export type UseTwoFactorAuthReturn = {
 
 export const OTP_MAX_LENGTH = 6;
 
-const fetchJson = async <T>(url: string): Promise<T> => {
-    const response = await fetch(url, {
-        headers: { Accept: 'application/json' },
-    });
-
-    if (!response.ok) {
-        throw new Error(`Failed to fetch: ${response.status}`);
-    }
-
-    return response.json();
-};
-
 export const useTwoFactorAuth = (): UseTwoFactorAuthReturn => {
+    const qrCodeHttp = useHttp<Record<string, never>, TwoFactorSetupData>();
+    const secretKeyHttp = useHttp<Record<string, never>, TwoFactorSecretKey>();
+    const recoveryCodesHttp = useHttp<Record<string, never>, string[]>();
+
     const [qrCodeSvg, setQrCodeSvg] = useState<string | null>(null);
     const [manualSetupKey, setManualSetupKey] = useState<string | null>(null);
     const [recoveryCodesList, setRecoveryCodesList] = useState<string[]>([]);
@@ -45,7 +38,7 @@ export const useTwoFactorAuth = (): UseTwoFactorAuthReturn => {
 
     const fetchQrCode = async (): Promise<void> => {
         try {
-            const { svg } = await fetchJson<TwoFactorSetupData>(qrCode.url());
+            const { svg } = await qrCodeHttp.get(qrCode.url());
             setQrCodeSvg(svg);
         } catch {
             setErrors((prev) => [...prev, 'Failed to fetch QR code']);
@@ -55,9 +48,7 @@ export const useTwoFactorAuth = (): UseTwoFactorAuthReturn => {
 
     const fetchSetupKey = async (): Promise<void> => {
         try {
-            const { secretKey: key } = await fetchJson<TwoFactorSecretKey>(
-                secretKey.url(),
-            );
+            const { secretKey: key } = await secretKeyHttp.get(secretKey.url());
             setManualSetupKey(key);
         } catch {
             setErrors((prev) => [...prev, 'Failed to fetch a setup key']);
@@ -83,7 +74,7 @@ export const useTwoFactorAuth = (): UseTwoFactorAuthReturn => {
     const fetchRecoveryCodes = async (): Promise<void> => {
         try {
             clearErrors();
-            const codes = await fetchJson<string[]>(recoveryCodes.url());
+            const codes = await recoveryCodesHttp.get(recoveryCodes.url());
             setRecoveryCodesList(codes);
         } catch {
             setErrors((prev) => [...prev, 'Failed to fetch recovery codes']);
