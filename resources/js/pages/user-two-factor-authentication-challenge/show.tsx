@@ -48,6 +48,7 @@ export default function Show() {
                 <Form
                     {...store.form()}
                     className="space-y-4"
+                    onError={() => setCode('')}
                     resetOnError
                     resetOnSuccess={!showRecoveryInput}
                 >
