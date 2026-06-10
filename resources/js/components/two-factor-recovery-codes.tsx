@@ -24,7 +24,7 @@ export default function TwoFactorRecoveryCodes({
     errors,
 }: Props) {
     const [codesAreVisible, setCodesAreVisible] = useState<boolean>(false);
-    const codesSectionRef = useRef<HTMLDivElement | null>(null);
+    const codesSectionRef = useRef<HTMLUListElement | null>(null);
     const canRegenerateCodes = recoveryCodesList.length > 0 && codesAreVisible;
 
     const toggleCodesVisibility = async (): Promise<void> => {
@@ -108,25 +108,23 @@ export default function TwoFactorRecoveryCodes({
                             <AlertError errors={errors} />
                         ) : (
                             <>
-                                <div
+                                <ul
                                     ref={codesSectionRef}
-                                    className="grid gap-1 rounded-lg bg-muted p-4 font-mono text-sm"
-                                    role="list"
+                                    className="grid list-none gap-1 rounded-lg bg-muted p-4 font-mono text-sm"
                                     aria-label="Recovery codes"
                                 >
                                     {recoveryCodesList.length ? (
                                         recoveryCodesList.map((code) => (
-                                            <div
+                                            <li
                                                 key={code}
-                                                role="listitem"
                                                 className="select-text"
                                             >
                                                 {code}
-                                            </div>
+                                            </li>
                                         ))
                                     ) : (
-                                        <div
-                                            className="space-y-2"
+                                        <li
+                                            className="list-none space-y-2"
                                             aria-label="Loading recovery codes"
                                         >
                                             {Array.from(
@@ -139,9 +137,9 @@ export default function TwoFactorRecoveryCodes({
                                                     />
                                                 ),
                                             )}
-                                        </div>
+                                        </li>
                                     )}
-                                </div>
+                                </ul>
 
                                 <div className="text-xs text-muted-foreground select-none">
                                     <p id="regenerate-warning">
