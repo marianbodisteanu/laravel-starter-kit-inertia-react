@@ -24,3 +24,4 @@ Homestead.yaml
 /.vscode
 /.zed
 /tmp/
+.gstack/
