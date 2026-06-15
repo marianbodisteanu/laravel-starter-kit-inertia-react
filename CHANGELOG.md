@@ -2,6 +2,30 @@
 
 All notable changes to this starter kit are documented here.
 
+## [2.1.0] - 2026-06-15
+
+### Security
+
+- Public auth endpoints that send mail or consume a token are now rate limited
+  (`throttle:6,1`): registration, forgot-password, and password reset — matching the limits
+  already on email verification and password updates. Closes account-creation/mail-flooding
+  and reset-token brute-force vectors. Login keeps its dedicated per-email-and-IP limiter.
+- Changing or resetting a password now signs the account out of every other session and
+  invalidates its remember-me cookies — on any session driver (redis, file, database) — via the
+  `AuthenticateSession` middleware. The device that made the change stays signed in.
+
+### Added
+
+- `/up` health-check route for uptime monitors and container orchestrators
+- JSON error responses for `api/*` requests via `shouldRenderJsonWhen`
+
+### Changed
+
+- Pages use Inertia v3 persistent layouts — the layout is assigned to the page component
+  instead of wrapping each page's markup
+- CI checkout runs with `persist-credentials: false` so the workflow token isn't left in the
+  git config of later steps
+
 ## [2.0.0] - 2026-06-10
 
 ### Changed
