@@ -75,3 +75,17 @@ it('redirects authenticated users away from forgot password', function (): void 
 
     $response->assertRedirectToRoute('dashboard');
 });
+
+it('throttles password reset requests', function (): void {
+    Notification::fake();
+
+    foreach (range(1, 6) as $ignored) {
+        $this->post(route('password.email'), [
+            'email' => 'test@example.com',
+        ])->assertRedirect();
+    }
+
+    $this->post(route('password.email'), [
+        'email' => 'test@example.com',
+    ])->assertStatus(429);
+});

@@ -122,6 +122,18 @@ it('requires matching password confirmation', function (): void {
         ->assertSessionHasErrors('password');
 });
 
+it('throttles reset password requests', function (): void {
+    foreach (range(1, 6) as $ignored) {
+        $this->fromRoute('password.reset', ['token' => 'fake-token'])
+            ->post(route('password.store'), [])
+            ->assertRedirect();
+    }
+
+    $this->fromRoute('password.reset', ['token' => 'fake-token'])
+        ->post(route('password.store'), [])
+        ->assertStatus(429);
+});
+
 it('renders edit password page', function (): void {
     $user = User::factory()->create();
 

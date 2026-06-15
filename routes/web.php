@@ -41,16 +41,19 @@ Route::middleware('guest')->group(function (): void {
     Route::get('register', [UserController::class, 'create'])
         ->name('register');
     Route::post('register', [UserController::class, 'store'])
+        ->middleware('throttle:6,1')
         ->name('register.store');
 
     Route::get('reset-password/{token}', [UserPasswordController::class, 'create'])
         ->name('password.reset');
     Route::post('reset-password', [UserPasswordController::class, 'store'])
+        ->middleware('throttle:6,1')
         ->name('password.store');
 
     Route::get('forgot-password', [UserEmailResetNotificationController::class, 'create'])
         ->name('password.request');
     Route::post('forgot-password', [UserEmailResetNotificationController::class, 'store'])
+        ->middleware('throttle:6,1')
         ->name('password.email');
 
     Route::get('login', [SessionController::class, 'create'])

@@ -185,3 +185,15 @@ it('redirects authenticated users away from registration', function (): void {
 
     $response->assertRedirectToRoute('dashboard');
 });
+
+it('throttles registration requests', function (): void {
+    foreach (range(1, 6) as $ignored) {
+        $this->fromRoute('register')
+            ->post(route('register.store'), [])
+            ->assertRedirect();
+    }
+
+    $this->fromRoute('register')
+        ->post(route('register.store'), [])
+        ->assertStatus(429);
+});
