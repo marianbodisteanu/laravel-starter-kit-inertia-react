@@ -196,6 +196,30 @@ it('requires correct current password to update', function (): void {
         ->assertSessionHasErrors('current_password');
 });
 
+it('keeps the current session authenticated after a password change', function (): void {
+    $user = User::factory()->create(['password' => Hash::make('old-password')]);
+
+    $this->actingAs($user)
+        ->fromRoute('password.edit')
+        ->put(route('password.update'), [
+            'current_password' => 'old-password',
+            'password' => 'new-password',
+            'password_confirmation' => 'new-password',
+        ])
+        ->assertRedirectToRoute('password.edit');
+
+    $this->get(route('password.edit'))->assertOk();
+});
+
+it('logs out a session whose stored password hash is stale', function (): void {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)
+        ->withSession(['password_hash_web' => 'stale-hash'])
+        ->get(route('password.edit'))
+        ->assertRedirect(route('login'));
+});
+
 it('requires new password to update', function (): void {
     $user = User::factory()->create([
         'password' => Hash::make('old-password'),
