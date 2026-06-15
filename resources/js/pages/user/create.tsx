@@ -1,4 +1,5 @@
 import { Form, Head } from '@inertiajs/react';
+import type { ReactNode } from 'react';
 import { InputError } from '@/components/input-error';
 import { PasswordInput } from '@/components/password-input';
 import { TextLink } from '@/components/text-link';
@@ -10,12 +11,9 @@ import { AuthLayout } from '@/layouts/auth-layout';
 import { login } from '@/wayfinder/routes';
 import { store } from '@/wayfinder/routes/register';
 
-export default function Register() {
+function Register() {
     return (
-        <AuthLayout
-            title="Create an account"
-            description="Enter your details below to create your account"
-        >
+        <>
             <Head title="Register" />
             <Form
                 {...store.form()}
@@ -101,6 +99,17 @@ export default function Register() {
                     </>
                 )}
             </Form>
-        </AuthLayout>
+        </>
     );
 }
+
+Register.layout = (page: ReactNode) => (
+    <AuthLayout
+        title="Create an account"
+        description="Enter your details below to create your account"
+    >
+        {page}
+    </AuthLayout>
+);
+
+export default Register;

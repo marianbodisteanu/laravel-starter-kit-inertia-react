@@ -1,4 +1,5 @@
 import { Form, Head } from '@inertiajs/react';
+import type { ReactNode } from 'react';
 import { TextLink } from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
@@ -6,12 +7,9 @@ import { AuthLayout } from '@/layouts/auth-layout';
 import { logout } from '@/wayfinder/routes';
 import { send } from '@/wayfinder/routes/verification';
 
-export default function VerifyEmail({ status }: { status?: string }) {
+function VerifyEmail({ status }: { status?: string }) {
     return (
-        <AuthLayout
-            title="Verify email"
-            description="Please verify your email address by clicking on the link we just emailed to you."
-        >
+        <>
             <Head title="Email verification" />
 
             {status === 'verification-link-sent' && (
@@ -42,6 +40,17 @@ export default function VerifyEmail({ status }: { status?: string }) {
                     </>
                 )}
             </Form>
-        </AuthLayout>
+        </>
     );
 }
+
+VerifyEmail.layout = (page: ReactNode) => (
+    <AuthLayout
+        title="Verify email"
+        description="Please verify your email address by clicking on the link we just emailed to you."
+    >
+        {page}
+    </AuthLayout>
+);
+
+export default VerifyEmail;

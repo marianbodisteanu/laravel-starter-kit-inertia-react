@@ -1,4 +1,5 @@
 import { Form, Head } from '@inertiajs/react';
+import type { ReactNode } from 'react';
 import { InputError } from '@/components/input-error';
 import { PasswordInput } from '@/components/password-input';
 import { TextLink } from '@/components/text-link';
@@ -18,16 +19,9 @@ type Props = {
     canRegister: boolean;
 };
 
-export default function Login({
-    status,
-    canResetPassword,
-    canRegister,
-}: Props) {
+function Login({ status, canResetPassword, canRegister }: Props) {
     return (
-        <AuthLayout
-            title="Log in to your account"
-            description="Enter your email and password below to log in"
-        >
+        <>
             <Head title="Log in" />
 
             <Form
@@ -107,6 +101,17 @@ export default function Login({
                     {status}
                 </div>
             )}
-        </AuthLayout>
+        </>
     );
 }
+
+Login.layout = (page: ReactNode) => (
+    <AuthLayout
+        title="Log in to your account"
+        description="Enter your email and password below to log in"
+    >
+        {page}
+    </AuthLayout>
+);
+
+export default Login;

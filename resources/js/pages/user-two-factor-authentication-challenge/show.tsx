@@ -1,4 +1,4 @@
-import { Form, Head } from '@inertiajs/react';
+import { Form, Head, setLayoutProps } from '@inertiajs/react';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 import { useState } from 'react';
 import { InputError } from '@/components/input-error';
@@ -13,23 +13,32 @@ import { OTP_MAX_LENGTH } from '@/hooks/use-two-factor-auth';
 import { AuthLayout } from '@/layouts/auth-layout';
 import { store } from '@/wayfinder/routes/two-factor/login';
 
-export default function Show() {
+const authCodeConfig = {
+    title: 'Authentication code',
+    description:
+        'Enter the authentication code provided by your authenticator application.',
+    toggleText: 'login using a recovery code',
+};
+
+const recoveryCodeConfig = {
+    title: 'Recovery code',
+    description:
+        'Please confirm access to your account by entering one of your emergency recovery codes.',
+    toggleText: 'login using an authentication code',
+};
+
+function Show() {
     const [showRecoveryInput, setShowRecoveryInput] = useState<boolean>(false);
     const [code, setCode] = useState<string>('');
 
     const authConfigContent = showRecoveryInput
-        ? {
-              title: 'Recovery code',
-              description:
-                  'Please confirm access to your account by entering one of your emergency recovery codes.',
-              toggleText: 'login using an authentication code',
-          }
-        : {
-              title: 'Authentication code',
-              description:
-                  'Enter the authentication code provided by your authenticator application.',
-              toggleText: 'login using a recovery code',
-          };
+        ? recoveryCodeConfig
+        : authCodeConfig;
+
+    setLayoutProps({
+        title: authConfigContent.title,
+        description: authConfigContent.description,
+    });
 
     const toggleRecoveryMode = (clearErrors: () => void): void => {
         setShowRecoveryInput(!showRecoveryInput);
@@ -38,10 +47,7 @@ export default function Show() {
     };
 
     return (
-        <AuthLayout
-            title={authConfigContent.title}
-            description={authConfigContent.description}
-        >
+        <>
             <Head title="Two-factor authentication" />
 
             <div className="space-y-6">
@@ -119,6 +125,13 @@ export default function Show() {
                     )}
                 </Form>
             </div>
-        </AuthLayout>
+        </>
     );
 }
+
+Show.layout = [
+    AuthLayout,
+    { title: authCodeConfig.title, description: authCodeConfig.description },
+];
+
+export default Show;

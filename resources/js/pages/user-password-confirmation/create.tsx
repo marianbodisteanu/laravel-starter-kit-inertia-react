@@ -1,4 +1,5 @@
 import { Form, Head } from '@inertiajs/react';
+import type { ReactNode } from 'react';
 import { InputError } from '@/components/input-error';
 import { PasswordInput } from '@/components/password-input';
 import { Button } from '@/components/ui/button';
@@ -7,12 +8,9 @@ import { Spinner } from '@/components/ui/spinner';
 import { AuthLayout } from '@/layouts/auth-layout';
 import { store } from '@/wayfinder/routes/password/confirm';
 
-export default function Create() {
+function Create() {
     return (
-        <AuthLayout
-            title="Confirm your password"
-            description="This is a secure area of the application. Please confirm your password before continuing."
-        >
+        <>
             <Head title="Confirm password" />
 
             <Form {...store.form()} resetOnSuccess={['password']}>
@@ -45,6 +43,17 @@ export default function Create() {
                     </div>
                 )}
             </Form>
-        </AuthLayout>
+        </>
     );
 }
+
+Create.layout = (page: ReactNode) => (
+    <AuthLayout
+        title="Confirm your password"
+        description="This is a secure area of the application. Please confirm your password before continuing."
+    >
+        {page}
+    </AuthLayout>
+);
+
+export default Create;
